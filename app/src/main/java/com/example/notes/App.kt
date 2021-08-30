@@ -17,6 +17,7 @@ class App:Application() {
         ServiceLocator.register(NotesDatabase.create(locate()))
         ServiceLocator.register(Repository(locate()))
     }
+}
 
     object ServiceLocator {
 
@@ -33,5 +34,7 @@ class App:Application() {
     }
 
     inline fun <reified T:Any> locate() = ServiceLocator.get(T::class)
-}
+
+    inline fun <reified T:Any> locateLazy():Lazy<T> = lazy {  ServiceLocator.get(T::class)}
+
 
